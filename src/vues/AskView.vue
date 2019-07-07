@@ -1,6 +1,6 @@
 <template>
     <div>
-        ask
+        asks
     </div>
 </template>
 
