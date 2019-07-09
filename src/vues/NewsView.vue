@@ -1,6 +1,10 @@
 <template>
     <div>
-        <div v-for="user in users">{{ user.title }}</div>
+        <!-- <div v-for="user in this.$store.state.news">{{ user.title }}</div> -->
+        <p v-for="user in this.$store.state.news">
+            <a v-bind:href="user.url">{{user.title}}</a>
+            <small>{{user.time_ago}} by {{user.user}}</small>
+        </p>
     </div>
 </template>
 
@@ -8,21 +12,8 @@
 import { fetchNewsList } from '../api/index.js';
 
 export default {
-    data() {
-        return {
-            users: []
-        }
-    },
     created() {
-        var vm = this;
-        fetchNewsList()
-            .then(function(response) {
-                console.log(response);
-                vm.users = response.data;
-            })
-            .catch(function(error) {
-                console.log(error);
-            });
+        this.$store.dispatch('FETCH_NEWS');
     },
 }
 </script>
